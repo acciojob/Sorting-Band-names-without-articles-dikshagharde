@@ -1,38 +1,31 @@
-//your code here
+let bandNames = ["The Beatles", "Rolling Stones", "Led Zeppelin", "Pink Floyd", "The Who", "The Doors"];
 
-//your code here
-const bandNames = [
-        "The Beatles",
-        "Led Zeppelin",
-        "The Rolling Stones",
-        "Radiohead",
-        "Pink Floyd",
-        "The Who",
-        "The Doors",
-      ];
+// Function to remove articles from band names
+function removeArticle(bandName) {
+  // List of articles to remove
+  let articles = ["a", "an", "the"];
+  // Split band name into words
+  let words = bandName.split(" ");
+  // Check if first word is an article
+  if (articles.includes(words[0].toLowerCase())) {
+    // Remove the article
+    words.shift();
+  }
+  // Join the remaining words and return the modified band name
+  return words.join(" ");
+}
 
-      // Function to strip articles from band names
-      const stripArticles = (name) => {
-        // Define an array of articles to remove
-        const articles = ["the", "a", "an"];
+// Sort the band names in lexicographic order excluding articles
+bandNames.sort(function(a, b) {
+  return removeArticle(a).localeCompare(removeArticle(b));
+});
 
-        // Split the name into words
-        const words = name.split(" ");
+// Get the ul element with id 'band'
+let ulElement = document.getElementById("band");
 
-        // Filter out any articles
-        const filteredWords = words.filter((word) => !articles.includes(word.toLowerCase()));
-
-        // Join the remaining words and return the result
-        return filteredWords.join(" ");
-      };
-
-      // Sort the band names without articles
-      const sortedBands = bandNames.sort((a, b) => stripArticles(a) > stripArticles(b) ? 1 : -1);
-
-      // Get the unordered list element and add each band name as a list item
-      const bandList = document.getElementById("band");
-      sortedBands.forEach((band) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = band;
-        bandList.appendChild(listItem);
-      });
+// Loop through the sorted band names and add them as li elements to the ul element
+for (let i = 0; i < bandNames.length; i++) {
+  let liElement = document.createElement("li");
+  liElement.textContent = bandNames[i];
+  ulElement.appendChild(liElement);
+}
