@@ -1,34 +1,34 @@
 //your code here
-const bandNames = ['The Beatles', 'Led Zeppelin', 'Pink Floyd', 'The Who', 'Aerosmith', 'Rolling Stones', 'Queen', 'Anthrax', 'Black Sabbath'];
 
-		function sortBands(bands) {
-			const articles = ['the', 'a', 'an'];
-			const sortedBands = bands.sort(function(a, b) {
-				const nameA = a.toLowerCase().replace(/^(the|an|a)\s+/, '');
-				const nameB = b.toLowerCase().replace(/^(the|an|a)\s+/, '');
-				if (nameA < nameB) {
-					return -1;
-				}
-				if (nameA > nameB) {
-					return 1;
-				}
-				return 0;
-			});
-			return sortedBands;
-		}
-let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
-touristSpots=touristSpots.sort();
-var ul=document.getElementById("#band");
-for(let i=0;i<touristSpots.length;i++){
-	let li=document.createElement("li");
-ul.appendChild(li);
-
-		const sortedBands = sortBands(bandNames);
-
-		const bandList = document.getElementById("band");
-		sortedBands.forEach(function(band) {
-			const li = document.createElement("li");
-			li.appendChild(document.createTextNode(band));
-			bandList.appendChild(li);
-		});
+let touristSpots=['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
+function removeArticles(touristSpots) {
+//   words = touristSpots.split(" ");
+//   if(words.length <= 1) return touristSpots;
+//   if( words[0] == 'a' || words[0] == 'the' || words[0] == 'an' )
+//     return words.splice(1).join(" ");
+//   return touristSpots;
+// }
+	for (const article of articles) {
+    if (touristSpots.toLowerCase().startsWith(article)) {
+      return touristSpots.slice(article.length).trim();
+    }
+  }
+  return touristSpots.trim();
 }
+const sortedBandNames = bandNames.sort((a, b) => removeArticle(a) > removeArticle(b) ? 1 : -1);
+
+// create the HTML list
+let htmlList = '<ul id="band">';
+sortedBandNames.forEach(name => {
+  htmlList += `<li>${name}</li>`;
+});
+htmlList += '</ul>';
+
+console.log(htmlList);
+
+
+
+
+
+
+	
