@@ -1,30 +1,22 @@
 //your code here
+//your code here
+const bandNames = ["The Beatles", "Led Zeppelin", "Pink Floyd", "The Who", "The Rolling Stones", "AC/DC", "Queen"];
 
-let touristSpots=['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
-function removeArticles(touristSpots) {
-//   words = touristSpots.split(" ");
-//   if(words.length <= 1) return touristSpots;
-//   if( words[0] == 'a' || words[0] == 'the' || words[0] == 'an' )
-//     return words.splice(1).join(" ");
-//   return touristSpots;
-// }
-	for (const article of articles) {
-    if (touristSpots.toLowerCase().startsWith(article)) {
-      return touristSpots.slice(article.length).trim();
-    }
-  }
-  return touristSpots.trim();
-}
-const sortedBandNames = bandNames.sort((a, b) => removeArticle(a) > removeArticle(b) ? 1 : -1);
+// Remove articles ('a', 'an', 'the') from the beginning of each band name
+const removeArticles = (name) => name.replace(/^(a|an|the)\s+/i, '');
 
-// create the HTML list
-let htmlList = '<ul id="band">';
+// Sort band names in lexicographic order (ignoring articles)
+const sortedBandNames = bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
+
+// Add sorted band names to the HTML list
+const bandList = document.getElementById('band');
 sortedBandNames.forEach(name => {
-  htmlList += `<li>${name}</li>`;
+  const listItem = document.createElement('li');
+  listItem.textContent = name;
+  bandList.appendChild(listItem);
 });
-htmlList += '</ul>';
 
-console.log(htmlList);
+
 
 
 
